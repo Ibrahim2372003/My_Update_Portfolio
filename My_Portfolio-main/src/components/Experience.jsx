@@ -1,96 +1,77 @@
 'use client'
-import Heading from './sub/Heading'
-import Image from 'next/image'
-import { arrowLeftIcon, experienceData } from '@/assets'
-import { motion, useScroll, useSpring } from 'framer-motion'
 import { useRef } from 'react'
+import { m, useScroll, useSpring } from 'framer-motion'
+import { journey } from '@/data/experience'
+import { ease } from '@/lib/motion'
+import Section from '@/components/ui/Section'
+import Reveal from '@/components/motion/Reveal'
 
-const Experience = () => {
-  const date = new Date().getFullYear()
+const KIND = { work: 'Experience', training: 'Training', education: 'Education' }
 
-  const containerRef = useRef(null)
+export default function Experience() {
+  const ref = useRef(null)
+  // The red spine fills as the timeline scrolls through the viewport.
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 65%', 'end 70%'] })
+  const fill = useSpring(scrollYProgress, { stiffness: 120, damping: 28, mass: 0.3 })
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start 95%', 'end end'],
-  })
-
-  const scrollY = useSpring(scrollYProgress, { stiffness: 200, damping: 20 })
   return (
-    <div id="experience" className="relative py-20">
-      <Heading text={'Experience & Education'} />
-      <Image
-        src={'/education.png'}
-        alt={'Experience Image'}
-        width={400}
-        height={400}
-        className="absolute -top-4 right-0 opacity-70 lg:hidden"
-      />
-      <div
-        ref={containerRef}
-        className="relative w-full h-full flex flex-col items-center justify-center gap-y-10 lg:gap-y-20 py-10"
-      >
-        {experienceData.map((data, i) => (
-          <div
-            key={`id-${i}`}
-            className={`w-[600px] xl:w-[480px] sm:w-full px-12 sm:px-0 relative -left-[300p ${
-              i % 2 === 0
-                ? '-left-[300px] xl:-left-[240px] lg:-left-0'
-                : 'left-[300px] xl:left-[240px] lg:left-0'
-            }`}
-          >
-            <motion.div
-              initial={{ opacity: 0, x: i % 2 === 0 ? -80 : 80 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, type: 'spring', stiffness: 50 }}
-              className="relative flex flex-col gap-y-3 rounded-md border border-red-300 bg-white p-4 tracking-wide sm:text-sm dark:bg-zinc-700 transition-colors z-20"
-            >
-              <h1 className="text-xl sm:text-lg font-light text-gray-700 dark:text-white">
-                {data.title}
-              </h1>
-              <p className="text-gray-800 dark:text-gray-100">
-                <span className="block font-light">Education:</span>
-                <span className="block pl-2 font-extralight">{data.education}</span>
-              </p>
-              <div className="text-gray-800 dark:text-gray-200 transition-colors">
-                <span className="font-light">Experience:</span>
-                <ul className="pl-2">
-                  {data.experience.map((exp, j) => (
-                    <li key={j} className="my-1 font-extralight">
-                      {exp}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <span
-                className={`absolute top-20 text-red-300 -translate-y-1/2 lg:hidden ${
-                  i % 2 === 0 ? 'left-full rotate-180' : 'right-full'
-                }`}
-              >
-                {arrowLeftIcon}
-              </span>
-            </motion.div>
-            <div
-              className={`w-14 absolute top-20 border border-gray-300 rounded-full aspect-square grid place-items-center text-red-400 font-light -translate-y-1/2 z-10 bg-white ${
-                i % 2 === 0
-                  ? 'left-full -translate-x-1/2 lg:left-1/2'
-                  : 'right-full translate-x-1/2 lg:right-1/2'
-              }`}
-            >
-              {date - experienceData.length + i + 1}
-            </div>
-          </div>
-        ))}
+    <Section
+      id="journey"
+      index="04"
+      label="Experience and learning"
+      title={[[{ t: 'Experience and ' }, { t: 'learning', accent: true }]]}
+      intro="Taken from my résumé: internships, teaching, and the training that got me here."
+    >
+      <div ref={ref} className="relative">
+        {/* Spine: faint base line + red progress line */}
+        <span aria-hidden className="absolute bottom-0 left-[5px] top-2 w-px bg-ink/15 lg:left-[13.5rem]" />
+        <m.span
+          aria-hidden
+          className="absolute bottom-0 left-[5px] top-2 w-px origin-top bg-red lg:left-[13.5rem]"
+          style={{ scaleY: fill }}
+        />
 
-        <motion.div
-          initial={{ scaleY: 0 }}
-          style={{ scaleY: scrollY }}
-          className="absolute w-1 h-full rounded-full bg-gray-300 origin-top"
-        ></motion.div>
+        <ol className="space-y-14 lg:space-y-20">
+          {journey.map((j, i) => (
+            <li key={j.id} className="relative grid gap-3 pl-8 lg:grid-cols-[12rem_1fr] lg:gap-14 lg:pl-0">
+              {/* Node */}
+              <m.span
+                aria-hidden
+                className="absolute left-0 top-[0.55rem] z-10 h-[11px] w-[11px] border border-ink bg-white lg:left-[13.5rem] lg:-ml-[5px]"
+                initial={{ scale: 0, backgroundColor: '#ffffff' }}
+                whileInView={{ scale: 1, backgroundColor: '#8B0000', borderColor: '#8B0000' }}
+                viewport={{ once: true, amount: 1 }}
+                transition={{ duration: 0.5, ease: ease.outExpo }}
+              />
+
+              <Reveal x={-14} y={0} className="lg:text-right">
+                <p className="font-mono text-[0.78rem] tracking-[0.06em] text-ink">{j.display}</p>
+                <p className="label-mono mt-1">{KIND[j.kind]}</p>
+              </Reveal>
+
+              <div className="lg:pl-14">
+                <Reveal as="h3" className="display text-[clamp(1.7rem,3vw,2.5rem)] text-ink">
+                  {j.title}
+                </Reveal>
+                <Reveal as="p" i={1} className="mt-2 text-[0.98rem] text-muted">
+                  <span className="font-medium text-ink">{j.org}</span>
+                  {j.place ? <span> · {j.place}</span> : null}
+                </Reveal>
+                {j.points.length > 0 && (
+                  <ul className="mt-5 max-w-2xl space-y-2.5">
+                    {j.points.map((p, k) => (
+                      <Reveal as="li" key={k} i={k + 2} y={14} className="flex gap-3 text-[0.96rem] leading-snug text-ink/85">
+                        <span aria-hidden className="mt-[0.7em] h-px w-3 shrink-0 bg-red" />
+                        <span>{p}</span>
+                      </Reveal>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </li>
+          ))}
+        </ol>
       </div>
-    </div>
+    </Section>
   )
 }
-
-export default Experience

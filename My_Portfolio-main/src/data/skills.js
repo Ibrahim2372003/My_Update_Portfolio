@@ -1,26 +1,79 @@
-// `group` only controls how skills are arranged on the page.
-export const skillsData = [
-  { name: 'VS Code', icon: '/skills/vscode.png', group: 'Tools' },
-  { name: 'HTML', icon: '/skills/html.png', group: 'Development' },
-  { name: 'CSS', icon: '/skills/css.png', group: 'Development' },
-  { name: 'JavaScript', icon: '/skills/js.png', group: 'Development' },
-  { name: 'TailwindCSS', icon: '/skills/tailwind.png', group: 'Development' },
-  { name: 'Vite', icon: '/skills/vite.png', group: 'Development' },
-  { name: 'ReactJS', icon: '/skills/react.png', group: 'Development' },
-  { name: 'TypeScript', icon: '/skills/ts.png', group: 'Development' },
-  { name: 'AI', icon: '/skills/ai.png', group: 'Design' },
-  { name: 'NextJS', icon: '/skills/nextjs.png', group: 'Development' },
-  { name: 'NodeJS', icon: '/skills/nodejs.png', group: 'Development' },
-  { name: 'MongoDB', icon: '/skills/mongodb.png', group: 'Development' },
-  { name: 'GitHub', icon: '/skills/github.png', group: 'Tools' },
-  {name:'NestJs',icon:'/skills/NestJs.webp',group:'Development'},
-    { name: 'Postgress SQL', icon: '/skills/Postgress SQL.webp', group: 'Development' },
-
-
-
+// Skills grouped by what they are used for. No ratings or percentages.
+// Source: résumé "Technical skills" + dependencies found in the project repos.
+// `id` matches the ids used in projects.js `tech`, which powers the
+// "used in" highlight (a skill lights up the projects that really use it).
+export const skillGroups = [
+  {
+    id: 'frontend',
+    title: 'Frontend',
+    items: [
+      { id: 'react', label: 'React' },
+      { id: 'nextjs', label: 'Next.js' },
+      { id: 'typescript', label: 'TypeScript' },
+      { id: 'javascript', label: 'JavaScript (ES6+)' },
+      { id: 'html-css', label: 'HTML5 and CSS3' },
+      { id: 'tailwind', label: 'Tailwind CSS' },
+      { id: 'redux', label: 'Redux Toolkit' },
+      { id: 'framer', label: 'Framer Motion' },
+    ],
+  },
+  {
+    id: 'backend',
+    title: 'Backend and APIs',
+    items: [
+      { id: 'node', label: 'Node.js' },
+      { id: 'express', label: 'Express.js' },
+      { id: 'nestjs', label: 'NestJS' },
+      { id: 'rest', label: 'REST APIs' },
+      { id: 'jwt', label: 'JWT authentication' },
+      { id: 'validation', label: 'Validation and rate limiting' },
+      { id: 'inngest', label: 'Background jobs (Inngest)' },
+    ],
+  },
+  {
+    id: 'data',
+    title: 'Data',
+    items: [
+      { id: 'postgres', label: 'PostgreSQL' },
+      { id: 'prisma', label: 'Prisma ORM' },
+      { id: 'mongodb', label: 'MongoDB' },
+      { id: 'sql', label: 'SQL' },
+    ],
+  },
+  {
+    id: 'ai',
+    title: 'AI integration',
+    items: [
+      { id: 'ai-sdk', label: 'Vercel AI SDK' },
+      { id: 'openai', label: 'OpenAI API' },
+      { id: 'gemini', label: 'Gemini API' },
+      { id: 'claude', label: 'Claude API' },
+    ],
+  },
+  {
+    id: 'quality',
+    title: 'Testing and quality',
+    items: [
+      { id: 'vitest', label: 'Vitest' },
+      { id: 'jest', label: 'Jest' },
+      { id: 'playwright', label: 'Playwright' },
+      { id: 'rtl', label: 'React Testing Library' },
+      { id: 'axe', label: 'axe and WAVE' },
+      { id: 'lighthouse', label: 'Lighthouse' },
+    ],
+  },
+  {
+    id: 'tools',
+    title: 'Tools',
+    items: [
+      { id: 'git', label: 'Git and GitHub' },
+      { id: 'docker', label: 'Docker' },
+      { id: 'postman', label: 'Postman' },
+      { id: 'vercel', label: 'Vercel' },
+      { id: 'vite', label: 'Vite' },
+    ],
+  },
 ]
 
-export const skillGroups = ['Development', 'Design', 'Tools'].map((title) => ({
-  title,
-  items: skillsData.filter((skill) => skill.group === title),
-}))
+// Also familiar with (from the résumé): Python, Java.
+export const alsoFamiliar = ['Python', 'Java']

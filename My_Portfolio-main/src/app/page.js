@@ -1,61 +1,34 @@
-'use client'
+import Intro from '@/components/motion/Intro'
+import Header from '@/components/Header'
 import Hero from '@/components/Hero'
-import About from '@/components/About'
-import Experience from '@/components/Experience'
-import Skills from '@/components/Skills'
-// Temporarily disabled; keep the component for future use.
-// import Reviews from '@/components/Reviews'
 import Projects from '@/components/Projects'
-// Temporarily disabled; keep the component for future use.
-// import PricingPlans from '@/components/PricingPlans'
+import About from '@/components/About'
+import Skills from '@/components/Skills'
+import Experience from '@/components/Experience'
 import Contact from '@/components/Contact'
-import Questions from '@/components/Questions'
-import Navbar from '@/components/Navbar'
-import Toggle from '@/components/sub/Toggle'
-import Load from '@/components/sub/Load'
-import { useState, useRef, useEffect } from 'react'
+import Footer from '@/components/Footer'
+
+// Pricing and Reviews are intentionally NOT rendered (see src/features.js).
+// The components stay in the repo. To restore one, import it here, render it
+// inside <main>, and add its entry back in src/data/navigation.js:
+//   import PricingPlans from '@/components/PricingPlans'   // pricing not ready
+//   import Reviews from '@/components/Reviews'             // no real testimonials yet
 
 export default function Home() {
-  const [id, setId] = useState(0)
-  const compsRef = useRef(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const intersecting = entry.isIntersecting
-          if (intersecting) {
-            setId(entry.target.id)
-          }
-        })
-      },
-      { threshold: 0.3 },
-    )
-
-    const compsArr = Array.from(compsRef.current.children)
-    compsArr.forEach((comp) => {
-      observer.observe(comp)
-    })
-  }, [])
   return (
-    <>
-      <Load />
-      <Toggle>
-        <Navbar id={id} />
-        <div className="w-min" ref={compsRef}>
+    <Intro>
+      <Header />
+      <div id="page-root">
+        <main id="main" tabIndex={-1} className="outline-none">
           <Hero />
-          <About />
-          <Experience />
-          <Skills />
-          {/* Reviews section temporarily disabled; restore when real testimonials are available. */}
-          {/* <Reviews /> */}
           <Projects />
-          {/* Pricing section temporarily disabled; restore when pricing is ready. */}
-          {/* <PricingPlans /> */}
+          <About />
+          <Skills />
+          <Experience />
           <Contact />
-          <Questions />
-        </div>
-      </Toggle>
-    </>
+        </main>
+        <Footer />
+      </div>
+    </Intro>
   )
 }

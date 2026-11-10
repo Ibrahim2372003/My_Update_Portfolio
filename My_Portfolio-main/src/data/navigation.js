@@ -1,14 +1,15 @@
+// Page order: Hero, Projects, About, Skills, Journey, Contact.
 // "Home" is the logo link, so it is not repeated in the nav list.
 export const navItems = [
-  { id: 'about', name: 'About' },
-  { id: 'experience', name: 'Experience' },
-  { id: 'skills', name: 'Skills' },
-  // { id: 'reviews', name: 'Reviews' }, // Restore when real testimonials are available.
-  { id: 'projects', name: 'Projects' },
+  { id: 'projects', name: 'Projects', num: '01' },
+  { id: 'about', name: 'About', num: '02' },
+  { id: 'skills', name: 'Skills', num: '03' },
+  { id: 'journey', name: 'Journey', num: '04' },
+  { id: 'contact', name: 'Contact', num: '05' },
+  // Disabled sections (components kept in the repo; see src/features.js):
+  // { id: 'reviews', name: 'Reviews' }, // Restore when real testimonials exist.
   // { id: 'pricing', name: 'Pricing' }, // Restore when pricing is ready.
-  { id: 'contact', name: 'Contact' },
-  { id: 'questions', name: 'Questions' },
 ]
 
-// Every section the scroll-spy should track (module-level so the reference is stable).
+// Every section the scroll-spy tracks (module-level so the reference is stable).
 export const sectionIds = ['home', ...navItems.map((item) => item.id)]
