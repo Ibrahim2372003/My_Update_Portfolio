@@ -8,7 +8,7 @@ export const profile = {
   // Public contact details that were already on the previous site.
   email: 'IbrahimMohammedIbrahim2372003@gmail.com',
   github: 'https://github.com/Ibrahim2372003',
-  linkedin: 'https://linkedin.com/in/ibrahim-mohamed-a4b531164/',
+  linkedin: 'https://www.linkedin.com/in/ibrahim-mohammed-a4b531164?utm_source=share_via&utm_content=profile&utm_medium=member_android',
   // The phone number is deliberately NOT stored here (owner decision).
   // Location is deliberately omitted until the owner approves showing it.
 }
