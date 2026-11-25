@@ -7,6 +7,7 @@ import { ease } from '@/lib/motion'
 import Section from '@/components/ui/Section'
 import Reveal from '@/components/motion/Reveal'
 import DrawLine from '@/components/motion/DrawLine'
+import SkillIcon from '@/components/SkillIcon'
 
 const usedIn = (id) => visibleProjects.filter((p) => p.tech.includes(id))
 const openProject = (slug, trigger) =>
@@ -102,6 +103,7 @@ export default function Skills() {
                         aria-hidden
                         className="absolute inset-x-0 bottom-0 h-[2px] origin-left scale-x-0 bg-red transition-transform duration-500 ease-out-expo group-hover:scale-x-100"
                       />
+                      <SkillIcon id={s.id} />
                       <span>{s.label}</span>
                       {n > 0 && (
                         <span className="font-mono text-[0.6rem] text-muted group-hover:text-red">
