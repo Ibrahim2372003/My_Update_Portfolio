@@ -39,6 +39,10 @@ export const TECH = {
   cheerio: 'Cheerio',
   rest: 'REST API',
   validation: 'Input validation',
+  redis: 'Redis',
+  docker: 'Docker',
+  bullmq: 'BullMQ',
+  pgvector: 'pgvector',
 }
 
 const gh = (repo) => `https://github.com/Ibrahim2372003/${repo}`
@@ -68,7 +72,7 @@ export const projects = [
     ],
     tech: ['nextjs', 'typescript', 'ai-sdk', 'gemini', 'zod', 'webgl', 'vitest', 'playwright', 'axe', 'validation'],
     status: { label: 'Live demo', tone: 'live' },
-    image: { src: null, alt: '' },
+    image: { src: '/projects/ai-seo-audit-chat.png', alt: 'AI SEO Audit Chat: audit assistant asking for a page URL to audit' },
     cover: { variant: 'grid', tone: 'ink', word: 'Audit' },
     links: { github: gh('AI-Audit-Chat'), live: 'https://ai-audit-chat.vercel.app' },
   },
@@ -97,7 +101,7 @@ export const projects = [
       label: 'PDF reports still being verified end to end',
       tone: 'progress',
     },
-    image: { src: null, alt: '' },
+    image: { src: '/projects/job-hunt-command-center.png', alt: 'Job Hunt Command Center: login page of the live demo' },
     cover: { variant: 'rows', tone: 'paper', word: 'Track' },
     links: {
       github: gh('Job-Hunt-Command-Center'),
@@ -148,6 +152,52 @@ export const projects = [
     image: { src: null, alt: '' },
     cover: { variant: 'bars', tone: 'ink', word: 'Checkout' },
     links: { github: gh('Shopping-App'), live: null },
+  },
+  {
+    slug: 'image-article-matcher',
+    name: 'Image-Article Matcher',
+    kind: 'compact',
+    year: 'Personal project',
+    summary:
+      'An AI content-mismatch guard that decides whether an image fits an article: accept, reject or review.',
+    description:
+      'Takes an article and an image and returns accept, reject or review. A deterministic, configurable policy layer decides the final outcome, kept separate from the model output so an AI failure never counts as acceptance.',
+    features: [
+      'Asynchronous job pipeline with an authenticated HTTP API and a Redis-backed queue.',
+      'PostgreSQL persistence; every evaluation is stored.',
+      'A matching service ranks articles for an image using pgvector embeddings.',
+    ],
+    highlights: [
+      'The policy layer, not the model, owns the final accept/reject decision.',
+    ],
+    tech: ['node', 'express', 'typescript', 'react', 'postgres', 'pgvector', 'redis', 'docker', 'gemini'],
+    status: { label: 'In progress', tone: 'progress' },
+    image: { src: null, alt: '' },
+    cover: { variant: 'grid', tone: 'tint', word: 'Match' },
+    links: { github: gh('image-article-matcher'), live: null },
+  },
+  {
+    slug: 'social-media-studio',
+    name: 'Social Media Studio',
+    kind: 'compact',
+    year: 'Personal project',
+    summary:
+      'An AI-assisted social media platform for campaigns, bilingual post writing, scheduling and reliable publishing.',
+    description:
+      'A platform for managing social media: create campaigns, write posts with an AI writing assistant that understands Modern Standard Arabic, Egyptian Arabic and English, then schedule and publish them reliably.',
+    features: [
+      'AI writing assistant that preserves meaning and dialect; the user always has the final say.',
+      'Reliable publishing with idempotency, retries, rate limits and per-destination status.',
+      'Scheduling through a separate background worker.',
+    ],
+    highlights: [
+      'NestJS API foundation with Docker Compose (PostgreSQL, Redis) is in place; auth, workers and migrations are the next phases.',
+    ],
+    tech: ['typescript', 'nestjs', 'postgres', 'prisma', 'bullmq', 'redis', 'react', 'tailwind', 'docker'],
+    status: { label: 'In progress', tone: 'progress' },
+    image: { src: null, alt: '' },
+    cover: { variant: 'bars', tone: 'paper', word: 'Publish' },
+    links: { github: gh('social-media-studio'), live: null },
   },
   {
     slug: 'polite-scraper',
