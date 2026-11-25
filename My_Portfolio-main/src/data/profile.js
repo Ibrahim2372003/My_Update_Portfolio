@@ -19,12 +19,10 @@ export const socials = [
   { id: 'email', label: 'Email', handle: profile.email, href: `mailto:${profile.email}` },
 ]
 
-// CV download is DISABLED until a redacted copy (no phone number) is approved.
-// The original PDF was moved out of /public to /private/cv so it is not served.
-// To enable: place the approved file in /public, set available: true and path.
+// Full Stack CV (owner approved adding it to the site, Nov 25 2026).
 export const cv = {
-  available: false,
-  path: '/cv.pdf',
+  available: true,
+  path: '/ibrahim-mohammed-full-stack-cv.pdf',
 }
 
 export const hero = {
