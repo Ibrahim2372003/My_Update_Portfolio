@@ -10,10 +10,10 @@
   --paper: 255 255 255; /* #FFFFFF */
   --red: 139 0 0; /* #8B0000 */
   --red-deep: 110 0 0; /* pressed state */
-  --tint: 248 238 238; /* #F8EEEE */
+  --tint: 245 245 245; /* #F5F5F5  neutral, no rose */
   --muted: 89 89 89; /* #595959  ~7:1 on white */
   --muted-dark: 176 176 176; /* #B0B0B0 on #111111 */
-  --line: 229 224 224;
+  --line: 229 229 229;
   --line-dark: 52 52 52;
 
   /* Motion tokens (mirrored in src/lib/motion.js) */
@@ -137,6 +137,49 @@ body {
 .ticker:hover .ticker-track,
 .ticker:focus-within .ticker-track {
   animation-play-state: paused;
+}
+
+/* Reflection sweep: a quiet black sheen crossing the page every ~16s.
+   Sits above page content, below the header (z-60) and dialog (z-70). */
+.sweep-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  overflow: hidden;
+}
+.sweep-overlay::before {
+  content: '';
+  position: absolute;
+  top: -25%;
+  bottom: -25%;
+  left: 0;
+  width: 30%;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(17, 17, 17, 0.018) 22%,
+    rgba(17, 17, 17, 0.045) 40%,
+    rgba(17, 17, 17, 0.075) 50%,
+    rgba(17, 17, 17, 0.045) 60%,
+    rgba(17, 17, 17, 0.018) 78%,
+    transparent 100%
+  );
+  filter: blur(7px);
+  transform: translateX(-180%) skewX(-10deg);
+  animation: sweep 16s var(--ease-in-out) infinite;
+  will-change: transform;
+}
+@keyframes sweep {
+  0% {
+    transform: translateX(-180%) skewX(-10deg);
+  }
+  24% {
+    transform: translateX(500%) skewX(-10deg);
+  }
+  100% {
+    transform: translateX(500%) skewX(-10deg);
+  }
 }
 
 @keyframes blink {
