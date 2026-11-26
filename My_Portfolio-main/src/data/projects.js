@@ -24,6 +24,7 @@ export const TECH = {
   'ai-sdk': 'Vercel AI SDK',
   inngest: 'Inngest',
   playwright: 'Playwright',
+  pdfkit: 'PDFKit',
   vitest: 'Vitest',
   jest: 'Jest',
   axe: 'axe-core',
@@ -88,19 +89,16 @@ export const projects = [
     features: [
       'Sign-up and login with JWT; every application is scoped to its owner.',
       'Track applications, status changes and follow-ups.',
-      'AI-assisted resume tailoring through the OpenAI API.',
-      'Asynchronous PDF report: the API replies 202 immediately, an Inngest background job renders the PDF, and the client polls pending, done or failed.',
+      'AI-assisted resume tailoring through the Gemini API.',
+      'Asynchronous PDF report: the API replies 202 immediately, an in-process background job renders the PDF with pdfkit, and the client polls pending, done or failed.',
     ],
     highlights: [
       'REST API with input validation, structured error handling and PostgreSQL persistence via Prisma.',
       'Idempotent report requests: a repeated request does not enqueue a second job, and a failed job can be retried.',
       'Ownership checks return 404 for other users’ records.',
     ],
-    tech: ['react', 'vite', 'node', 'express', 'postgres', 'prisma', 'jwt', 'openai', 'inngest', 'playwright', 'rest', 'validation'],
-    status: {
-      label: 'PDF reports still being verified end to end',
-      tone: 'progress',
-    },
+    tech: ['react', 'vite', 'node', 'express', 'postgres', 'prisma', 'jwt', 'gemini', 'pdfkit', 'rest', 'validation'],
+    status: { label: 'Live demo', tone: 'live' },
     image: { src: '/projects/job-hunt-command-center.png', alt: 'Job Hunt Command Center: login page of the live demo' },
     cover: { variant: 'rows', tone: 'paper', word: 'Track' },
     links: {
