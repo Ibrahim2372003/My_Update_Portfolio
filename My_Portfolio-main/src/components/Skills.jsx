@@ -25,9 +25,9 @@ export default function Skills() {
       title={[[{ t: 'Tools I ' }, { t: 'actually', accent: true }, { t: ' use.' }]]}
       intro="Grouped by what they are for, with no ratings. Select a skill to see which of my projects use it."
     >
-      {/* Readout: a skill lights up the projects that really use it. */}
-      <Reveal className="mb-12 min-h-[5.5rem] border border-ink/15 p-5 sm:p-6" y={14}>
-        <p className="label-mono mb-2">Used in</p>
+      {/* Readout: a skill lights up the projects that really use it. Black panel. */}
+      <Reveal className="on-dark mb-12 min-h-[5.5rem] border border-ink bg-ink p-5 sm:p-6" y={14}>
+        <p className="label-mono mb-2 !text-muted-dark">Used in</p>
         <div aria-live="polite" className="min-h-[2.2rem]">
           <AnimatePresence mode="wait" initial={false}>
             <m.div
@@ -38,23 +38,23 @@ export default function Skills() {
               transition={{ duration: 0.25, ease: ease.outExpo }}
               className="flex flex-wrap items-center gap-x-3 gap-y-2"
             >
-              {!active && <span className="text-muted">Choose a skill below.</span>}
+              {!active && <span className="text-muted-dark">Choose a skill below.</span>}
               {active && matches.length === 0 && (
-                <span className="text-muted">
-                  <strong className="font-medium text-ink">{active.label}</strong> is part of my toolkit but is not in a
+                <span className="text-muted-dark">
+                  <strong className="font-medium text-white">{active.label}</strong> is part of my toolkit but is not in a
                   featured project yet. See the journey below.
                 </span>
               )}
               {active && matches.length > 0 && (
                 <>
                   <strong className="font-display text-2xl text-red">{active.label}</strong>
-                  <span aria-hidden className="h-px w-6 bg-ink/30" />
+                  <span aria-hidden className="h-px w-6 bg-white/30" />
                   {matches.map((p) => (
                     <button
                       key={p.slug}
                       type="button"
                       onClick={(e) => openProject(p.slug, e.currentTarget)}
-                      className="border-b border-ink/40 text-[0.98rem] text-ink transition-colors hover:border-red hover:text-red"
+                      className="border-b border-white/40 text-[0.98rem] text-white transition-colors hover:border-red hover:text-red"
                     >
                       {p.name}
                     </button>
