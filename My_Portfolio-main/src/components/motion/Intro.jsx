@@ -22,7 +22,10 @@ export default function Intro({ children }) {
     } catch {}
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (seen || reduce) {
-      setPhase('done')
+      // 'gone' unmounts the whole AnimatePresence subtree at once. Using the
+      // animated 'done' path here left the SSR curtain stuck on screen
+      // (its exit never fired on a same-tab reload).
+      setPhase('gone')
       setReady(true)
       return
     }
@@ -40,8 +43,9 @@ export default function Intro({ children }) {
   return (
     <IntroContext.Provider value={ready}>
       {children}
-      <AnimatePresence>
-        {phase !== 'done' && (
+      {phase !== 'gone' && (
+        <AnimatePresence>
+          {phase !== 'done' && (
           <m.div
             key="intro"
             aria-hidden="true"
@@ -77,8 +81,9 @@ export default function Intro({ children }) {
               </div>
             )}
           </m.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>
+      )}
       <noscript>
         <style>{'.intro-overlay{display:none!important}'}</style>
       </noscript>
