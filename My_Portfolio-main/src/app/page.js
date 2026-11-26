@@ -19,6 +19,7 @@ export default function Home() {
     <Intro>
       <Header />
       <div id="page-root">
+        <div aria-hidden className="sweep-overlay" />
         <main id="main" tabIndex={-1} className="outline-none">
           <Hero />
           <Projects />
@@ -31,4 +32,4 @@ export default function Home() {
       </div>
     </Intro>
   )
-}
+    }
