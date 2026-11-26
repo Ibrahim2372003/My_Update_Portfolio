@@ -105,7 +105,7 @@ export const projects = [
     cover: { variant: 'rows', tone: 'paper', word: 'Track' },
     links: {
       github: gh('Job-Hunt-Command-Center'),
-      live: 'https://job-hunt-command-center-iota.vercel.app',
+      live: 'https://job-hunt-command-center-64jw.vercel.app',
     },
   },
   {
