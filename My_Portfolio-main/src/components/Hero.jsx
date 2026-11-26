@@ -61,7 +61,7 @@ export default function Hero() {
     >
       {/* Technical backdrop: a faint crosshair grid; dark-red marks reveal near the pointer. */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 opacity-[0.55]" style={{ backgroundImage: plus('#d9d2d2') }} />
+        <div className="absolute inset-0 opacity-[0.55]" style={{ backgroundImage: plus('#d9d9d9') }} />
         <div
           className="absolute inset-0 transition-opacity duration-500"
           style={{
@@ -165,9 +165,9 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Tech ticker */}
+      {/* Tech ticker: black band */}
       <m.div
-        className="ticker relative border-y border-ink/10 bg-white/80"
+        className="ticker on-dark relative border-y border-ink bg-ink"
         initial={{ opacity: 0 }}
         animate={{ opacity: ready ? 1 : 0 }}
         transition={{ delay: 1, duration: 0.8 }}
@@ -178,7 +178,7 @@ export default function Hero() {
               <li
                 key={i}
                 aria-hidden={i >= TICKER.length ? true : undefined}
-                className="flex items-center gap-10 font-mono text-[0.72rem] uppercase tracking-[0.18em] text-muted"
+                className="flex items-center gap-10 font-mono text-[0.72rem] uppercase tracking-[0.18em] text-muted-dark"
               >
                 {t}
                 <span className="h-1 w-1 bg-red" aria-hidden />
